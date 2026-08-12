@@ -20,7 +20,7 @@ public class EmployeeID implements Serializable {
         this.empId = empId;
     }
 
-    // You MUST implement equals() and hashCode() for Composite Keys
+    // We MUST implement equals() and hashCode() for Composite Keys
     // 1.equals()
     @Override
     public boolean equals(Object o) {
