@@ -5,9 +5,11 @@ import java.sql.Date;
 
 import com.example.EmployeeID;
 import com.example.EmployeeStatus;
+import com.example.Listener.EmployeeListener;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
@@ -16,6 +18,7 @@ import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "employees")
+@EntityListeners(EmployeeListener.class) // Attached EmplooyeeListener(Listener) class
 public class Employee {
 
     @EmbeddedId // 1. COMPOSITE KEY used here empId & DeptId
@@ -30,7 +33,7 @@ public class Employee {
 
     // @Transient // TRANSIENT (Calculated in Java, NEVER saved to the database colm
     // invisible cauclations)
-    // private double calculatedBonus;
+    // private double calculatedBonus
 
     public Employee() {
     }
@@ -41,6 +44,14 @@ public class Employee {
         this.joinDate = joinDate;
         // this.calculatedBonus = 5000.0; // We can calculate this, but it won't be
         // saved
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
 }
