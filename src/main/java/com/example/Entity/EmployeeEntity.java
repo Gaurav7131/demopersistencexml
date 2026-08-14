@@ -19,7 +19,7 @@ import jakarta.persistence.TemporalType;
 @Entity
 @Table(name = "employees")
 @EntityListeners(EmployeeListener.class) // Attached EmplooyeeListener(Listener) class
-public class Employee {
+public class EmployeeEntity {
 
     @EmbeddedId // 1. COMPOSITE KEY used here empId & DeptId
     private EmployeeID id;
@@ -35,10 +35,10 @@ public class Employee {
     // invisible cauclations)
     // private double calculatedBonus
 
-    public Employee() {
+    public EmployeeEntity() {
     }
 
-    public Employee(EmployeeID id, String name, EmployeeStatus status, Date joinDate) {
+    public EmployeeEntity(EmployeeID id, String name, EmployeeStatus status, Date joinDate) {
         this.id = id;
         this.status = status;
         this.joinDate = joinDate;

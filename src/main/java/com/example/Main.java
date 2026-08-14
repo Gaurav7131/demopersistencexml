@@ -2,7 +2,7 @@ package com.example;
 
 import java.sql.Date;
 
-import com.example.Entity.Employee;
+import com.example.Entity.EmployeeEntity;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -29,7 +29,7 @@ public class Main {
             em.getTransaction().begin();// start transaction
 
             // State:transient(new) just a normal java object,db does nothing
-            Employee newEmp = new Employee(mynewempId, "Gaurav", EmployeeStatus.ACTIVE, new Date(0));
+            EmployeeEntity newEmp = new EmployeeEntity(mynewempId, "Gaurav", EmployeeStatus.ACTIVE, new Date(0));
             System.out.println("Saving Employee to db");
 
             // State:Managed:jpa not tracking this object
@@ -43,7 +43,7 @@ public class Main {
             em.getTransaction().begin();
 
             // State:Manage:fetched from DB,jpa watching it
-            Employee findEmp = em.find(Employee.class, newEmp);
+            EmployeeEntity findEmp = em.find(EmployeeEntity.class, newEmp);
             System.out.println("Fetched name:" + findEmp.getName());
 
             // It is managed state we must used setter method not em.persist()
@@ -56,7 +56,7 @@ public class Main {
             em.getTransaction().begin();
 
             // state:manage
-            Employee trackemp = em.find(Employee.class, findEmp);
+            EmployeeEntity trackemp = em.find(EmployeeEntity.class, findEmp);
             System.out.println("Fetched Tracked Emp" + trackemp.getName());
 
             // State:Deatached(Jpa stop watching from now)
@@ -65,7 +65,7 @@ public class Main {
 
             // To save the deatached entity ,we must reatached to existing trans(trackemp).
             // used merge
-            Employee reatachEmployee = em.merge(trackemp);// State:manage again
+            EmployeeEntity reatachEmployee = em.merge(trackemp);// State:manage again
 
             em.getTransaction().commit();
             System.out.println(" Merged deattached Changes Sucessfully\n");
@@ -74,7 +74,7 @@ public class Main {
             em.getTransaction().begin();
 
             // to remove entity it must be in managed state so fetched it
-            Employee empToDelete = em.find(Employee.class, reatachEmployee);
+            EmployeeEntity empToDelete = em.find(EmployeeEntity.class, reatachEmployee);
 
             // state:Delete (Remove)
             em.remove(empToDelete);

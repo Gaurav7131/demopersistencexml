@@ -9,5 +9,5 @@ public interface BankAccountRepository extends JpaRepository<BankAccount, Long> 
     // Pessimistic Locking:Pessimitistic.WRITE-request physical Exclusive Lock
     // Explicitly telling jpa to Lock the specific row for Write priviledges
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    BankAccount findWithLockByID(Long id);
+    BankAccount findWithLockById(Long id);
 }

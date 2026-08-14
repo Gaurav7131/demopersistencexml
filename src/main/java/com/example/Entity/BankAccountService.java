@@ -27,7 +27,7 @@ public class BankAccountService {
     // USer 1 complete first,while user 2 blocked physically(db_level)
     @Transactional
     public void withdrawMoney(Long accountId, Double amount) {
-        BankAccount account = repository.findWithLockByID(accountId);
+        BankAccount account = repository.findWithLockById(accountId);
 
         if (account.getBalance() >= amount) {
             account.setBalance(account.getBalance() - amount);
