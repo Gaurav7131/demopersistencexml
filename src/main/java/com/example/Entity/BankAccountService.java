@@ -15,7 +15,7 @@ public class BankAccountService {
     // Scenario 1.Optimistic Locking
     // If USer 1 and User 2 tries to acess account at same time, user 1 will saved
     // sucessfuly while user 2 will throws
-    // ObjectOptimisticLockClockFailureException
+    // ObjectOptimisticLockClockFailureException(findById)
     @Transactional
     public void updateProfile(Long accountId, String newName) {
         BankAccount account = repository.findById(accountId).orElseThrow();
@@ -24,7 +24,7 @@ public class BankAccountService {
     }
 
     // Scenario 2.Pessimistic Locking
-    // USer 1 complete first,while user 2 blocked physically(db_level)
+    // USer 1 complete first,while user 2 blocked physically(db_level) findwithLockByIdCoo()
     @Transactional
     public void withdrawMoney(Long accountId, Double amount) {
         BankAccount account = repository.findWithLockById(accountId);
