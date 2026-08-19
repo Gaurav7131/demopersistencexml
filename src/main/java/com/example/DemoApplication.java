@@ -1,13 +1,18 @@
 package com.example;
 
 import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import com.example.Entity.AppConfigNew;
+import com.example.springcorelab.NotificationService;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
@@ -129,5 +134,29 @@ public class DemoApplication {
         // Spel
         SpelEx spelEx = context.getBean(SpelEx.class);
         spelEx.DisplayValue();
+
+        // Notitification Service Object
+        System.out.println("----Notification Service--Testing");
+
+        // initiating the ApplicationContext container
+        AnnotationConfigApplicationContext context2 = new AnnotationConfigApplicationContext(AppConfigNew.class);
+
+        // register user
+        com.example.springcorelab.UserController userController = context2.getBean("userController",
+                com.example.springcorelab.UserController.class);
+        userController.registerUser("Gaurav");
+
+        // Testing @bean annotation retrieval
+        String sysId = context2.getBean("customSystemId", String.class);
+        System.out.println("Bean retrival custom id:" + sysId);
+
+        // Sms NotificationService
+        NotificationService sms1 = context2.getBean("smsService", NotificationService.class);
+        NotificationService sms2 = context2.getBean("smsService", NotificationService.class);
+
+        System.out.println("Are Prototype scope is working? " + (sms1 == sms2));
+
+        // close the conttext
+        context2.close();
     }
 }

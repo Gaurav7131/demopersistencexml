@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-DemoApplication<demopersistencexml>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.example.DemoApplication",
+      "projectName": "demopersistencexml",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
